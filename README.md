@@ -1,4 +1,4 @@
-# container
+# Container
 Exemplos de arquivos Dockerfile e docker-compose.yaml
 
 Organização do Projeto
@@ -6,27 +6,27 @@ Organização do Projeto
 
     |
     ├── /docker-composes
-    │   ├── .env									<- Arquivo com variáveis utilizadas nos arquivos yaml
-    │   ├── pgdb_pgadmin.yaml						<- Docker compose que inicia um banco postgres com pgadmin
-    │   ├── /prom_graf       						<- Pasta que contêm os arquivos necessários para o exemplo de prometheus com grafana
-    │   │   ├── docker-compose.yaml                 <- Arquivo compose que inicia os serviços prometheus e grafana
+    │   ├── .env                           <- Arquivo com variáveis utilizadas nos arquivos yaml
+    │   ├── pgdb_pgadmin.yaml              <- Docker compose que inicia um banco postgres com pgadmin
+    │   ├── /prom_graf                     <- Pasta que contêm os arquivos necessários para o exemplo de prometheus com grafana
+    │   │   ├── docker-compose.yaml        <- Arquivo compose que inicia os serviços prometheus e grafana
     │   │   ├── /grafana
-    │   │   │    └── datasource.yaml                <- Configuração de datasource para o grafana, onde buscará dados no prometheus
+    │   │   │    └── datasource.yaml       <- Configuração de datasource para o grafana, onde buscará dados no prometheus
     │   │   └── /prometheus
-    │   │       └── prometheus.yaml                 <- Arquivo de configuração do prometheus para coleta de métricas do grafana
-    │   └── simple.yaml								<- Exemplo mais simples de docker-compose
+    │   │       └── prometheus.yaml        <- Arquivo de configuração do prometheus para coleta de métricas do grafana
+    │   └── simple.yaml                    <- Exemplo mais simples de docker-compose
     │
-    ├── /dockerfiles                                <- Pasta contendo exemplos de diferentes Dockerfile
-    │   ├── dev_environment							<- Dockerfile que cria um ambiente de desenvolvimento com VSCode para Python
-    │   ├── hello.c  								<- Programa simples em C que imprime a mensagem Olá
-    │   ├── index.html       						<- Exemplo mínimo de página HTML
-    │   ├── minimal       							<- Exemplo mínimo para um Dockerfile
-    │   ├── multi_stage       						<- Exemplo de build contendo vários estágios para diminuir o tamanho da imagem
-    │   ├── simple      							<- Exemplo simples de dockerfile que instala um programa em linux
-    │   ├── simple_cmd       						<- Exemplo simples anterior com execução de comando ao criar o container
-    │   ├── simple_entry_cmd       					<- Exemplo simples anterior utilizando um combinado de ENTRYPOINT e CMD
-    │   └── website									<- Exemplo de dockerfile que cria uma imagem nginx com uma página personalizada
-    └── README.md                          			<- Este arquivo leia-me
+    ├── /dockerfiles                       <- Pasta contendo exemplos de diferentes Dockerfile
+    │   ├── dev_environment                <- Dockerfile que cria um ambiente de desenvolvimento com VSCode para Python
+    │   ├── hello.c                        <- Programa simples em C que imprime a mensagem Olá
+    │   ├── index.html                     <- Exemplo mínimo de página HTML
+    │   ├── minimal                        <- Exemplo mínimo para um Dockerfile
+    │   ├── multi_stage                    <- Exemplo de build contendo vários estágios para diminuir o tamanho da imagem
+    │   ├── simple                         <- Exemplo simples de dockerfile que instala um programa em linux
+    │   ├── simple_cmd                     <- Exemplo simples anterior com execução de comando ao criar o container
+    │   ├── simple_entry_cmd               <- Exemplo simples anterior utilizando um combinado de ENTRYPOINT e CMD
+    │   └── website                        <- Exemplo de dockerfile que cria uma imagem nginx com uma página personalizada
+    └── README.md                          <- Este arquivo leia-me
      
 --------
 
