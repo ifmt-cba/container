@@ -5,7 +5,7 @@ Organização do Projeto
 ------------
 
     |
-    ├── /docker-composes
+    ├── /docker-composes                   <- Pasta contendo scripts para instanciação de contêineres
     │   ├── .env                           <- Arquivo com variáveis utilizadas nos arquivos yaml
     │   ├── pgdb_pgadmin.yaml              <- Docker compose que inicia um banco postgres com pgadmin
     │   ├── /prom_graf                     <- Pasta que contêm os arquivos necessários para o exemplo de prometheus com grafana
@@ -16,7 +16,7 @@ Organização do Projeto
     │   │       └── prometheus.yaml        <- Arquivo de configuração do prometheus para coleta de métricas do grafana
     │   └── simple.yaml                    <- Exemplo mais simples de docker-compose
     │
-    ├── /dockerfiles                       <- Pasta contendo exemplos de diferentes Dockerfile
+    ├── /dockerfiles                       <- Pasta contendo scrips para criação de imagens
     │   ├── dev_environment                <- Dockerfile que cria um ambiente de desenvolvimento com VSCode para Python
     │   ├── hello.c                        <- Programa simples em C que imprime a mensagem Olá
     │   ├── index.html                     <- Exemplo mínimo de página HTML
