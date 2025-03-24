@@ -1,0 +1,6 @@
+FROM alpine:latest
+RUN apk update
+RUN apk add python3
+WORKDIR /programa
+COPY program.py .
+CMD ["python", "program.py"]
