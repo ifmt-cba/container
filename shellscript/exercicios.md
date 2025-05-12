@@ -16,7 +16,7 @@ Se o argumento for um diretório, conte quantos arquivos existem nele e mostre a
 
 6 - Escreva um Shell Script que imprima as palavras "shell", "script", "usando", "estrutura", "repetição", "for", "terminal" na tela, uma palavra por linha.
 
-7 - Modifique o Shell Script do exercício 6 para aceitar uma quantidade ilimitada de arquivos ou diretórios como argumento (ou parâmetro).
+7 - Modifique o Shell Script do exercício 3 para aceitar uma quantidade ilimitada de arquivos ou diretórios como argumento (ou parâmetro).
 
 8 - Escreva um Shell Script que renomeie todos os arquivos do diretório atual que terminam em ".png", de forma que o nome do arquivo comece com a data atual no formato "YYYY-MM-DD".
 Por exemplo, se tiver um arquivo com o nome "kitten.png" no diretório atual, e a data de hoje for 16/04/2020, o script deverá mudar o nome do arquivo para "2020-04-16-kitten.png".
