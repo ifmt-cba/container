@@ -6,7 +6,7 @@ dir_source=/etc
 dir_dest=/backup
 #FUNCTIONS --------------------------------------------------------------- #
 compact() {
-   tar -cjvf $dir_dest/bkp-$timestamp-usr.tar.bz2 $dir_source
+   tar -cvf $dir_dest/bkp-$timestamp-usr.tar.gz $dir_source
 }
 isroot() {
    if [ "$UID" -ne "$ROOT_UID" ]
