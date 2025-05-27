@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 import socket
 
 def server_program():
