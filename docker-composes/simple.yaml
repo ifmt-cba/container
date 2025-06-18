@@ -4,4 +4,4 @@ services:
         container_name: nginx
         restart: always
         ports:
-        - 8000:80
+        - 10000:80
