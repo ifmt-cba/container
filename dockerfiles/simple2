@@ -1,5 +1,7 @@
 FROM alpine:latest
-RUN apk update
+RUN <<EOF
+apk update
 RUN apk add figlet
 RUN echo $HOME > minha-pasta.txt
-
+apk cache clean --purge
+EOF

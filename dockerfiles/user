@@ -1,0 +1,16 @@
+FROM alpine:latest
+# Criar um novo grupo chamado 'user' e um usuário 'user' que pertence a esse grupo
+RUN addgroup -S fiplan && adduser -S -g fiplan preti
+# Criar um diretório para a aplicação e copiar o conteúdo da pasta atual para app
+WORKDIR /app
+COPY . /app
+
+RUN <<EOF
+apk update
+apk add python3
+EOF
+
+# Alternar para o usuário 'user' antes de executar a aplicação
+USER preti
+# Define o comando a ser executado quando o contêiner iniciar
+ENTRYPOINT ["python3", "program.py"]

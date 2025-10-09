@@ -1,0 +1,6 @@
+FROM nginx:latest
+COPY <<EOF /usr/share/nginx/html/index.html
+<h1>Página Personalizada do Minicurso de Dockerfile</h1>
+EOF
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
