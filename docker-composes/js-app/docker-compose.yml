@@ -1,0 +1,9 @@
+services:
+  app:
+    image: app:latest
+    build:
+      context: .
+    ports:
+      - ${APP_PORT:-9000}:80
+  redis:
+    image: redis:6

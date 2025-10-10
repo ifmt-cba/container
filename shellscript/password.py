@@ -18,4 +18,4 @@ print(f'SHA (512): {sha.hexdigest()}')
 #bcrypt is designed to be slow. bcrypt also has an option to 
 #adjust how slow (salt) you want it to be when generating the hashed
 #password for the first time:
-print(f'CRYPT: {bcrypt.hashpw(str2hash, bcrypt.gensalt( 14 ))}')
+#print(f'CRYPT: {bcrypt.hashpw(str2hash, bcrypt.gensalt( 14 ))}')
