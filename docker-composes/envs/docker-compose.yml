@@ -1,0 +1,29 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "${FRONTEND_PORT:-9000}:80"
+    profiles: ["full","designer"]
+
+  backend:
+    build: ./backend
+    ports:
+      - "${BACKEND_PORT:-9001}:80"
+    environment:
+      DATABASE_URL: postgres://user:password@db:5432/mydatabase
+    depends_on:
+      - db
+    profiles: ["full","backend"]
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    profiles: ["full", "backend", "dba"]
+
+volumes:
+  db_data:
