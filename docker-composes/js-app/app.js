@@ -15,6 +15,7 @@ const {createClient: createRedisClient} = require("redis");
         const counterValue = await redisClient.get("counter");
         const newCounterValue = ((parseInt(counterValue) || 0) + 1);
         await redisClient.set("counter", newCounterValue);
+        console.log(`Page loaded. Counter = ${newCounterValue}`);
         response.send(`Page loads: ${newCounterValue}`);
     });
 

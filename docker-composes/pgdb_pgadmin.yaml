@@ -9,7 +9,7 @@ services:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
     volumes:
-      - local_pgdata:/var/lib/postgresql/data
+      - pg-data:/var/lib/postgresql/data
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
@@ -23,5 +23,5 @@ services:
       - pgadmin-data:/var/lib/pgadmin
 
 volumes:
-  local_pgdata:
+  pg-data:
   pgadmin-data:

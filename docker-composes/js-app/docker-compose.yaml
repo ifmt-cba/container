@@ -6,4 +6,4 @@ services:
     ports:
       - ${APP_PORT:-9000}:80
   redis:
-    image: redis:6
+    image: redis:7

@@ -1,0 +1,23 @@
+services:
+  traefik:
+    image: traefik:v3.5
+    command:
+      - --api.insecure=true # Habilita o Dashboard do Traefik para teste
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+    ports:
+      - "80:80"
+      - "8080:8080" # Porta do dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  app:
+    image: app:latest
+    build:
+      context: .
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.app.rule=Host(`app.localhost`)"
+      - "traefik.http.services.app.loadbalancer.server.port=80"
+
+  redis:
+    image: redis:7
