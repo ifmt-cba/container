@@ -1,0 +1,35 @@
+FROM ubuntu
+
+# Instala o servidor OpenSSH e outras dependências necessárias
+RUN apt update && apt install -y openssh-server \
+    sudo && apt clean && rm -rf /var/lib/apt/lists/*
+
+# Cria o diretório necessário para o daemon SSH
+RUN mkdir /var/run/sshd
+
+# Copia a chave pública autorizada para o diretório do usuário root
+# Certifique-se que você tem um arquivo chamado 'authorized_keys' no mesmo diretório do Dockerfile
+# COPY authorized_keys /root/.ssh/authorized_keys
+# RUN chmod 600 /root/.ssh/authorized_keys
+
+# Define a senha do usuário root (substitua "123456" por uma senha de sua escolha)
+# Nota: É uma prática insegura em produção; use autenticação baseada em chave em cenários reais
+RUN echo 'root:123456' | chpasswd
+
+# Permite o login do root (para fins de exemplo; ajuste conforme sua necessidade de segurança)
+RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Expõe a porta 22 para conexões SSH
+EXPOSE 22
+
+# Inicia o servidor SSH como o processo principal do contêiner
+CMD ["/usr/sbin/sshd", "-D"]
+
+# Para descobrir o IP do container para poder acessar via ssh
+# sudo docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' my_ssh_container
+
+# Para executar o container
+# docker run -d -p 2222:22 ssh
+
+# Para acessar o container via ssh
+# ssh root@ip_descoberto_inspect -p 22
