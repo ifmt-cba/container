@@ -1,0 +1,15 @@
+services:
+  site:
+    image: nginx:latest
+    deploy:
+      resources:
+        reservations:
+          cpus: "0.2"     # garante pelo menos 20% de um core
+          memory: "16M"   # garante pelo menos 16 megabytes de RAM
+        limits:
+          cpus: "2.0"     # máximo permitido de 2 cores da CPU
+          memory: "128M"  # máximo de 128 megabytes de RAM
+    container_name: nginx
+    restart: always
+    ports:
+    - 10000:80

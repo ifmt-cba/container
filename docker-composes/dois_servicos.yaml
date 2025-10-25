@@ -3,6 +3,7 @@ services:
     image: hello-world
     container_name: ola
     restart: no
+
   ping:
     image: busybox
     container_name: ping
