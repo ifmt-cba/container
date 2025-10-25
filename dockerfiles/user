@@ -1,5 +1,5 @@
 FROM alpine:latest
-# Criar um novo grupo chamado 'user' e um usuário 'user' que pertence a esse grupo
+# Criar um novo grupo chamado 'fiplan' e um usuário 'preti' que pertence a esse grupo
 RUN addgroup -S fiplan && adduser -S -g fiplan preti
 # Criar um diretório para a aplicação e copiar o conteúdo da pasta atual para app
 WORKDIR /app
