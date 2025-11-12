@@ -16,7 +16,7 @@ services:
     profiles: ["full","backend"]
 
   db:
-    image: postgres:13
+    image: postgres:17.6
     environment:
       POSTGRES_DB: mydatabase
       POSTGRES_USER: user
