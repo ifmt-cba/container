@@ -14,7 +14,7 @@ arquivoff=$(date "+offline-%F-%H-%M.log")
 arquivon=$(date "+online-%F-%H-%M.log")
 
 while IFS= read -r IP; do
-    if ping -c 1 "$IP" > /dev/null 2>&1; then
+    if ping -c 1 -W 2 "$IP" > /dev/null 2>&1; then
         echo $IP >> $arquivon
         echo "O endereço ${BLUE}$IP${RESET} está ${GREEN}online.${RESET}"
     else
