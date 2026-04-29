@@ -4,7 +4,7 @@ WORKDIR git
 RUN apt install -y apt-transport-https
 RUN apt update -y
 RUN apt upgrade -y
-RUN apt install -y micro bat git git-flow curl gcc gdb cppcheck make
+RUN apt install -y curl
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 COPY config.yaml /root/.config/code-server/config.yaml
 RUN code-server --install-extension eamodio.gitlens

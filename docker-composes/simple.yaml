@@ -1,7 +1,5 @@
 services:
   site:
     image: nginx:latest
-    container_name: nginx
-    restart: always
     ports:
     - 10000:80

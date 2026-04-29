@@ -12,7 +12,7 @@ MINIO_SECURE = False # Set to True if using HTTPS
 # Bucket and object details
 BUCKET_NAME = "my-test-bucket"
 FILE_TO_UPLOAD = sys.argv[1]
-OBJECT_NAME = "uploaded_file.txt"
+OBJECT_NAME = sys.argv[1]
 
 def main():
     # Create a MinIO client

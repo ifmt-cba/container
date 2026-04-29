@@ -1,0 +1,15 @@
+services:
+  servidor1:
+    image: ssh
+    ports:
+      - "5001:22"
+
+  servidor2:
+    image: ssh
+    ports:
+      - "5002:22"
+
+  servidor3:
+    image: ssh
+    ports:
+      - "5003:22"

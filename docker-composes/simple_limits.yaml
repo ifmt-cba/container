@@ -9,7 +9,5 @@ services:
         limits:
           cpus: "2.0"     # máximo permitido de 2 cores da CPU
           memory: "128M"  # máximo de 128 megabytes de RAM
-    container_name: nginx
-    restart: always
     ports:
     - 10000:80
