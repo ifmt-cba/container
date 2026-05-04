@@ -1,0 +1,19 @@
+- name: Meu primeiro playbook ansible
+  hosts: local
+  tasks:
+   - name: Ping meus hosts
+     ansible.builtin.ping:
+
+   - name: Exibir mensagem
+     ansible.builtin.debug:
+       msg: Olá Mundo!
+
+- name: Instalar Figlet
+  hosts: servidor1
+  become: yes
+  tasks:
+    - name: Garantir que Figlet esteja instalado
+      apk:
+        name: figlet
+        state: present
+        update_cache: yes
