@@ -4,7 +4,7 @@ ARG USERNAME=jppreti
 ARG USER_HOME=/home/$USERNAME
 ARG PUB_KEY_FILE=ifmt_ed25519.pub
 
-RUN apk add --no-cache openssh sudo python3
+RUN apk add --no-cache openssh sudo python3~3.12
 
 RUN ssh-keygen -A
 
