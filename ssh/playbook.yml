@@ -13,7 +13,58 @@
   become: yes
   tasks:
     - name: Garantir que Figlet esteja instalado
-      apk:
+      ansible.builtin.apk:
         name: figlet
         state: present
         update_cache: yes
+
+- name: Instalação e Configuração do Nginx no Alpine Linux
+  hosts: servidor2
+  become: yes  # Necessário para privilégios de root (sudo)
+
+  tasks:
+    - name: Garantir que o repositório de pacotes esteja atualizado
+      community.general.apk:
+        update_cache: yes
+
+    - name: Instalar o pacote Nginx
+      community.general.apk:
+        name: nginx
+        state: present
+
+    - name: Garantir que o diretório de execução existe
+      ansible.builtin.file:
+        path: /run/nginx
+        state: directory
+        owner: nginx
+        group: nginx
+
+    - name: Verificar se o Nginx já está rodando
+      ansible.builtin.shell: pgrep -x nginx
+      register: nginx_running
+      ignore_errors: yes
+      failed_when: false
+      changed_when: false
+
+    - name: Executar o Nginx diretamente (apenas se não estiver rodando)
+      ansible.builtin.command: nginx
+      when: nginx_running.rc != 0
+      failed_when: false
+      
+    - name: Verificar se o Nginx está respondendo (Opcional)
+      ansible.builtin.uri:
+        url: http://localhost
+        status_code: 404
+      register: result
+      ignore_errors: yes
+
+    - name: Exibir status da conexão
+      ansible.builtin.debug:
+        msg: "Nginx está online e respondendo!"
+      when: result.status == 404
+
+    - name: Criar diretório para o conteúdo web
+      file:
+        path: /usr/share/nginx/html
+        state: directory
+        mode: '0755'

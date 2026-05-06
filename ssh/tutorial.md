@@ -7,3 +7,6 @@ nano Dockerfile
 podman build -t exemplossh:latest .
 podman run --rm -d -p 2222:22 exemplossh
 ssh devuser@localhost -p 2222
+ansible-galaxy collection install community.general
+ansible local -m ping -i hosts.yml
+ansible-playbook -i hosts.yml playbook.yml
