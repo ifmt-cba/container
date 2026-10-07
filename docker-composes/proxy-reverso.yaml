@@ -1,0 +1,82 @@
+services:
+  traefik:
+    image: traefik:v3.7
+    command:
+      - --api.insecure=true # Habilita o Dashboard do Traefik para teste
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+    ports:
+      - "80:80"
+      - "8080:8080" # Porta do dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+
+  site:
+    image: nginx:latest
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.site.rule=Host(`progredes.com.br`)"
+      - "traefik.http.services.site.loadbalancer.server.port=80"
+
+  minio:
+    image: pgsty/minio
+    volumes:
+      - minio_data:/data
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minio.rule=Host(`storage.progredes.com.br`)"
+      - "traefik.http.services.minio.loadbalancer.server.port=80"
+    user: "root"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server /data --console-address ":80"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  db:
+    image: postgres:17.6
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-postgres@ifmt.edu.br}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pgadmin.rule=Host(`database.progredes.com.br`)"
+      - "traefik.http.services.pgadmin.loadbalancer.server.port=80"
+
+  grafana:
+    image: grafana/grafana
+    user: "root" # Necessário para permitir que o container use a porta 80 internamente
+    restart: unless-stopped
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
+      - GF_SERVER_HTTP_PORT=80 # Altera a porta interna do Grafana para 80 e não 3000 (default)
+    volumes:
+      - ./grafana:/etc/grafana/provisioning/datasources
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.grafana.rule=Host(`dashboard.progredes.com.br`)"
+      - "traefik.http.services.grafana.loadbalancer.server.port=80"
+
+volumes:
+  pg-data:
+  pgadmin-data:
+  minio_data:

@@ -5,5 +5,7 @@ services:
       context: .
     ports:
       - ${APP_PORT:-9000}:80
+    depends_on:
+      - redis
   redis:
     image: redis:7

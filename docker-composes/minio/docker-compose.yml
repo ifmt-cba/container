@@ -1,6 +1,6 @@
 services:
   minio:
-    image: minio/minio
+    image: pgsty/minio
     ports:
       - "9000:9000"
       - "9001:9001" # MinIO Console port
