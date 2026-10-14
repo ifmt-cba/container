@@ -21,6 +21,11 @@
 - name: Instalação e Configuração do Nginx no Alpine Linux
   hosts: servidor2
   become: yes  # Necessário para privilégios de root (sudo)
+  
+  handlers:
+  - name: Recarregar Nginx
+    ansible.builtin.shell: nginx -s reload
+    become: yes
 
   tasks:
     - name: Garantir que o repositório de pacotes esteja atualizado
@@ -68,3 +73,23 @@
         path: /usr/share/nginx/html
         state: directory
         mode: '0755'
+
+    - name: Atualizar o arquivo de configuração default do Nginx no Alpine
+      ansible.builtin.copy:
+        src: nginx.conf
+        dest: /etc/nginx/http.d/default.conf
+        owner: root
+        group: root
+        mode: '0644'
+      notify: Recarregar Nginx
+
+    - name: Copiando página para o Servidor web
+      ansible.builtin.copy:
+        src: index.html
+        dest: /usr/share/nginx/html/index.html
+        owner: nginx
+        group: nginx
+        mode: '0644'
+        backup: yes
+
+
